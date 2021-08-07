@@ -8,4 +8,8 @@
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AAA\Factories\" />
+  </ItemGroup>
+
 </Project>
