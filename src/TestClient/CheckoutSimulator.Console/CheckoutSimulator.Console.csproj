@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CheckoutSimulator.Application\CheckoutSimulator.Application.csproj" />
+    <ProjectReference Include="..\CheckoutSimulator.Domain\CheckoutSimulator.Domain.csproj" />
+    <ProjectReference Include="..\CheckoutSimulator.Persistence\CheckoutSimulator.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
