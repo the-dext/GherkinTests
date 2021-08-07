@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <Folder Include="AAA\Factories\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AAA\Factories\" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
   </ItemGroup>
 
 </Project>

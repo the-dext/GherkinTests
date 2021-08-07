@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkinTests", "GherkinTests\GherkinTests.csproj", "{F4744A6E-1F0C-4808-88D3-68937BFE9DFE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{18BB7C66-C1B5-4663-9540-B849C6B27DE7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GherkinTests.Tests", "GherkinTests.Tests\GherkinTests.Tests.csproj", "{2A8FDA99-98F0-42FD-8B1C-83724916805C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{F4744A6E-1F0C-4808-88D3-68937BFE9DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4744A6E-1F0C-4808-88D3-68937BFE9DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4744A6E-1F0C-4808-88D3-68937BFE9DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8FDA99-98F0-42FD-8B1C-83724916805C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8FDA99-98F0-42FD-8B1C-83724916805C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8FDA99-98F0-42FD-8B1C-83724916805C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8FDA99-98F0-42FD-8B1C-83724916805C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A8FDA99-98F0-42FD-8B1C-83724916805C} = {18BB7C66-C1B5-4663-9540-B849C6B27DE7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {53F0D21A-D6F5-4E06-A4FA-D1B7543E896C}
