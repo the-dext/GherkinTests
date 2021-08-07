@@ -6,8 +6,6 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using FluentAssertions.Execution;
-
     /// <summary>
     /// Defines the <see cref="ScenarioContext{T}" />.
     /// </summary>
@@ -54,15 +52,7 @@
             {
                 ("Scenario", new List<string> { scenario })
             };
-
-            this.AssertionScope = new AssertionScope();
-            this.AddOrUpdateTestReportable();
         }
-
-        /// <summary>
-        /// Gets the AssertionScope.
-        /// </summary>
-        public AssertionScope AssertionScope { get; }
 
         /// <summary>
         /// Gets the Scenario.
@@ -77,7 +67,6 @@
         public void AddStage(string stage, string step)
         {
             this.scenarioDescriptors.Add((stage, new List<string> { step }));
-            this.AddOrUpdateTestReportable();
         }
 
         /// <summary>
@@ -207,21 +196,13 @@
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects)
-                    this.AssertionScope?.Dispose();
+                    // this.AssertionScope?.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
                 // TODO: set large fields to null
                 this.isDisposed = true;
             }
-        }
-
-        /// <summary>
-        /// The AddOrUpdateTestReportable.
-        /// </summary>
-        private void AddOrUpdateTestReportable()
-        {
-            this.AssertionScope.AddReportable("test", this.GetTestDescription());
         }
     }
 }

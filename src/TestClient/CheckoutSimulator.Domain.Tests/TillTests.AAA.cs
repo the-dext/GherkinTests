@@ -24,6 +24,7 @@ namespace CheckoutSimulator.Domain.Tests
 
     using static TestUtils.TestIdioms;
     using static GherkinTests.AAA.AAAScenario;
+    using FluentAssertions.Execution;
 
     /// <summary>
     /// Defines the <see cref="TillTests" />.
@@ -36,6 +37,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Can_Scan_Item()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario("Can scan an item"))
             {
                 string expectedBarcode = "B15";
@@ -59,6 +61,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Can_Scan_MultipleItems()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario("Can scan multiple items"))
             {
                 Till sut = default;
@@ -87,6 +90,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Can_Total_Scanned_Items()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario("Can scan multiple items"))
             {
                 double totalPriceResult = 0;
@@ -119,6 +123,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public async Task ItemDiscount_CanBeApplied_DuringScanning()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario("Item discount can be applied during scanning"))
             {
                 const string Barcode = "B15";
@@ -143,6 +148,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public async Task ItemDiscount_CanBeApplied_DuringScanning_WithActions()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario("Item discount can be applied during scanning"))
             {
                 const string Barcode = "B15";
@@ -167,6 +173,7 @@ namespace CheckoutSimulator.Domain.Tests
         public async Task Scanning_Unknown_Item_Throws_Exception_Alternative_Implementation_Async()
         {
             // Arrange
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario("Scanning unknown item throws exception"))
             {
                 string unexpectedBarcode = "A12";
@@ -193,33 +200,11 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Till_Implements_ITill()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario("Till should be assignable to ITill"))
             {
                 typeof(Till).Should().BeAssignableTo<ITill>();
             }
-        }
-
-        /// <summary>
-        /// The VoidItems_Resets_ScannedItems.
-        /// </summary>
-        [Fact]
-        public void VoidItems_Resets_ScannedItems()
-        {
-            // Arrange
-            TestFixtureBuilder testFixture = new TestFixtureBuilder();
-            Till sut = testFixture
-                .WithStockKeepingUnit("B15", 0.45, "Biscuits")
-                .WithPreviouslyScannedItem("B15")
-                .WithPreviouslyScannedItem("B15")
-                .BuildSut();
-            int originalItemCount = sut.ListScannedItems().Count();
-
-            // Act
-            sut.VoidItems();
-
-            // Assert
-            originalItemCount.Should().Be(2);
-            sut.ListScannedItems().Count().Should().Be(0);
         }
 
         /// <summary>

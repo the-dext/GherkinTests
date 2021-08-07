@@ -24,6 +24,7 @@ namespace CheckoutSimulator.Domain.Tests
 
     using static TestUtils.TestIdioms;
     using static GherkinTests.Gherkin.GherkinScenario;
+    using FluentAssertions.Execution;
 
     /// <summary>
     /// Defines the <see cref="TillTests" />.
@@ -38,6 +39,7 @@ namespace CheckoutSimulator.Domain.Tests
         {
             string expectedBarcode = "B15";
 
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Till>("Can scan an item"))
             {
                 scenario.Ctor(() =>
@@ -58,6 +60,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Can_Scan_MultipleItems()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Till>("Can scan multiple items"))
             {
                 scenario
@@ -88,6 +91,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Can_Total_Scanned_Items()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Till>("Can scan multiple items"))
             {
                 double totalPrice = 0;
@@ -113,6 +117,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void CompleteScanning_Resets_ScannedItems()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Till>("Complete scanning resets scanned items"))
             {
                 int originalItemCount = 0;
@@ -135,6 +140,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Constructor_GuardsAgainstNullArgs()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<GuardClauseAssertion>("Constructor Guards Against Null Args"))
             {
                 scenario.Ctor(() => CreateGuardClauseAssertion())
@@ -153,6 +159,7 @@ namespace CheckoutSimulator.Domain.Tests
             const string Barcode = "B15";
             const double ExpectedPrice = 0.45;
 
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Till>("Item discount can be applied during scanning"))
             {
                 await scenario
@@ -173,6 +180,7 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Methods_GuardAgainstNullArgs()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<GuardClauseAssertion>("Methods Guard Against Null Args"))
             {
                 scenario.Ctor(() => CreateGuardClauseAssertion())
@@ -189,6 +197,7 @@ namespace CheckoutSimulator.Domain.Tests
         public void Scanning_Unknown_Item_Throws_Exception()
         {
             // Arrange
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Till>("Scanning unknown item throws exception"))
             {
                 string unexpectedBarcode = "A12";
@@ -212,6 +221,7 @@ namespace CheckoutSimulator.Domain.Tests
         public void Scanning_Unknown_Item_Throws_Exception_Alternative_Implementation()
         {
             // Arrange
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Action>("Scanning unknown item throws exception"))
             {
                 string unexpectedBarcode = "A12";
@@ -236,6 +246,7 @@ namespace CheckoutSimulator.Domain.Tests
         public async Task Scanning_Unknown_Item_Throws_Exception_Alternative_Implementation_Async()
         {
             // Arrange
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Action>("Scanning unknown item throws exception"))
             {
                 string unexpectedBarcode = "A12";
@@ -262,33 +273,11 @@ namespace CheckoutSimulator.Domain.Tests
         [Fact]
         public void Till_Implements_ITill()
         {
+            using (var scope = new AssertionScope())
             using (var scenario = Scenario<Till>("Till should be assignable to ITill"))
             {
                 typeof(Till).Should().BeAssignableTo<ITill>();
             }
-        }
-
-        /// <summary>
-        /// The VoidItems_Resets_ScannedItems.
-        /// </summary>
-        [Fact]
-        public void VoidItems_Resets_ScannedItems()
-        {
-            // Arrange
-            TestFixtureBuilder testFixture = new TestFixtureBuilder();
-            Till sut = testFixture
-                .WithStockKeepingUnit("B15", 0.45, "Biscuits")
-                .WithPreviouslyScannedItem("B15")
-                .WithPreviouslyScannedItem("B15")
-                .BuildSut();
-            int originalItemCount = sut.ListScannedItems().Count();
-
-            // Act
-            sut.VoidItems();
-
-            // Assert
-            originalItemCount.Should().Be(2);
-            sut.ListScannedItems().Count().Should().Be(0);
         }
 
         /// <summary>

@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using FluentAssertions.Execution;
-
     /// <summary>
     /// Defines the <see cref="AAAScenarioContext{T}" />.
     /// </summary>
@@ -27,13 +25,7 @@
         /// <param name="_">The _<see cref="string"/>.</param>
         internal AAAScenarioContext(string _)
         {
-            this.AssertionScope = new AssertionScope();
         }
-
-        /// <summary>
-        /// Gets the AssertionScope.
-        /// </summary>
-        public AssertionScope AssertionScope { get; }
 
         /// <summary>
         /// Gets the Scenario.
@@ -90,7 +82,6 @@
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects)
-                    this.AssertionScope?.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
