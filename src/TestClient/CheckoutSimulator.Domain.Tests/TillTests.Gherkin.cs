@@ -225,11 +225,11 @@ namespace CheckoutSimulator.Domain.Tests
                 .GivenAsync()
                 .WhenAsync("scanning an item")
                 .AndAsync("and the item has an unrecognised barcode")
-                .ThenAsync("an exception should be thrown", (sutAction) =>
+                .ThenAsync("an 'Unrecognised barcode: A12' exception should be thrown", (sutAction, because) =>
                     sutAction
                         .Should()
-                        .Throw<UnknownItemException>()
-                        .WithMessage("Unrecognised barcode: A12"))
+                        .Throw<UnknownItemException>(because)
+                        .WithMessage("Unrecognised barcode: A12", because))
                 .Go();
             }
         }
