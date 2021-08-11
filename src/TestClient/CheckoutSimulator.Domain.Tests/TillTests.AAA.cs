@@ -3,7 +3,6 @@
 namespace CheckoutSimulator.Domain.Tests
 {
     using AutoFixture;
-    using AutoFixture.Idioms;
 
     using CheckoutSimulator.Domain;
     using CheckoutSimulator.Domain.Exceptions;
@@ -22,7 +21,6 @@ namespace CheckoutSimulator.Domain.Tests
 
     using Xunit;
 
-    using static TestUtils.TestIdioms;
     using static GherkinTests.AAA.AAAScenario;
     using FluentAssertions.Execution;
 
@@ -179,18 +177,19 @@ namespace CheckoutSimulator.Domain.Tests
                 string unexpectedBarcode = "A12";
                 Action action = default;
 
-                scenario.Arrange(() =>
+                await scenario.ArrangeAsync(() =>
                 {
                     var till = new TestFixtureBuilder()
                         .WithStockKeepingUnit("B15", 0.45, "Biscuits")
                         .BuildSut();
                     action = new Action(() => till.ScanItem(unexpectedBarcode));
                 })
-                .Act(() => { })
-                .Assert(() =>  action
+                .ActAsync(() => { })
+                .AssertAsync(() =>  action
                         .Should()
                         .Throw<UnknownItemException>()
-                        .WithMessage("Unrecognised barcode: A12"));
+                        .WithMessage("Unrecognised barcode: A12"))
+                .Go();
             }
         }
 

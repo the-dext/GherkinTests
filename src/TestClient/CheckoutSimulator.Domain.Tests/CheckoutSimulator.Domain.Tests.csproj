@@ -27,7 +27,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\GherkinTests\GherkinTests.csproj" />
     <ProjectReference Include="..\CheckoutSimulator.Domain\CheckoutSimulator.Domain.csproj" />
-    <ProjectReference Include="..\TestUtils\TestUtils.csproj" />
   </ItemGroup>
 
 </Project>

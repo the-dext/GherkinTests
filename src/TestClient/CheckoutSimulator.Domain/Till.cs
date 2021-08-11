@@ -75,10 +75,10 @@ namespace CheckoutSimulator.Domain
             return Math.Round(result,2);
         }
 
-        public async Task<double> RequestTotalPriceAsync()
+        public Task<double> RequestTotalPriceAsync()
         {
             var result = this.scannedItems.Sum(x => x.IsDiscounted ? x.PriceAdjustment : x.UnitPrice);
-            return Math.Round(result, 2);
+            return Task.FromResult(Math.Round(result, 2));
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace CheckoutSimulator.Domain
         {
             Guard.Against.Null(barcode, nameof(barcode));
 
-            async Task<IScanningResult> Do()
+            Task<IScanningResult> Do()
             {
 
                 var sku = this.stockKeepingUnits.FirstOrDefault(x => x.Barcode.Equals(barcode))
@@ -114,7 +114,8 @@ namespace CheckoutSimulator.Domain
                 this.ApplyItemDiscounts(momento);
 
                 this.scannedItems.Add(momento);
-                return new ScanningResult(true, momento.Message);
+                var ret = new ScanningResult(true, momento.Message) as IScanningResult;
+                return Task.FromResult(ret);
             }
 
             return Do();

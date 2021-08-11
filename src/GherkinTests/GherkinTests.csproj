@@ -12,6 +12,12 @@
     <RepositoryUrl>https://github.com/the-dext/GherkinTests</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>gherkin unit-tests testing arrange-act-assert aaa bdd cucumber spec</PackageTags>
+    <Copyright>Copyright (c) 2021 Chris Dexter</Copyright>
+    <Authors>Chris Dexter</Authors>
+    <Company />
+    <PackageIcon>cucumber.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +26,10 @@
 
   <ItemGroup>
     <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="resources\cucumber.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

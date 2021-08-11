@@ -62,6 +62,18 @@
         }
 
         /// <summary>
+        /// The AndsAsync. Use this overload when the And step has no action to take and is merely a place holder for the step description.
+        /// </summary>
+        /// <param name="stepDescription">The step description.</param>
+        /// <returns></returns>
+        public WhenStageAsync<T> AndAsync(string stepDescription)
+        {
+            this.scenarioContext.AddStep(StepType.And, stepDescription);
+            this.scenarioContext.AddStepFunction((x)=>Task.CompletedTask);
+            return this;
+        }
+
+        /// <summary>
         /// The Dispose.
         /// </summary>
         public void Dispose()

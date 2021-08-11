@@ -96,6 +96,12 @@
             return this.givenStage;
         }
 
+        public GivenStageAsync<T> GivenAsync()
+        {
+            this.givenStageAsync = GivenStageFactory<T>.CreateAsyncStage(this.scenarioContext, (x) => Task.CompletedTask);
+            return this.givenStageAsync;
+        }
+
         /// <summary>
         /// The GivenAsync.
         /// </summary>

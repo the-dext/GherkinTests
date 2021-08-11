@@ -96,6 +96,18 @@
         }
 
         /// <summary>
+        /// The When. This overload should be used when there is no action to take during the when stage, and it is merely a place holder for the when description
+        /// </summary>
+        /// <param name="stepDescription">The step description.</param>
+        /// <returns></returns>
+        public WhenStageAsync<T> WhenAsync(string stepDescription)
+        {
+            this.scenarioContext.AddStage("When", stepDescription);
+            this.whenStage = WhenStageFactory<T>.CreateAsyncStage(this.scenarioContext, (x)=>Task.CompletedTask);
+            return this.whenStage;
+        }
+
+        /// <summary>
         /// The Dispose.
         /// </summary>
         /// <param name="disposing">The disposing<see cref="bool"/>.</param>

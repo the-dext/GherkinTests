@@ -3,7 +3,6 @@
 namespace CheckoutSimulator.Domain.Tests
 {
     using AutoFixture;
-    using AutoFixture.Idioms;
 
     using CheckoutSimulator.Domain;
     using CheckoutSimulator.Domain.Exceptions;
@@ -21,8 +20,6 @@ namespace CheckoutSimulator.Domain.Tests
     using System.Threading.Tasks;
 
     using Xunit;
-
-    using static TestUtils.TestIdioms;
     using static GherkinTests.Gherkin.GherkinScenario;
     using FluentAssertions.Execution;
 
@@ -135,22 +132,6 @@ namespace CheckoutSimulator.Domain.Tests
         }
 
         /// <summary>
-        /// The Constructors Guards Against Null Args.
-        /// </summary>
-        [Fact]
-        public void Constructor_GuardsAgainstNullArgs()
-        {
-            using (var scope = new AssertionScope())
-            using (var scenario = Scenario<GuardClauseAssertion>("Constructor Guards Against Null Args"))
-            {
-                scenario.Ctor(() => CreateGuardClauseAssertion())
-                .Given()
-                .When((sut) => { })
-                .Then("constructors check for null arguments", (sut, because) => ApplyGuardClauseAssertionToConstructors<Till>(sut));
-            }
-        }
-
-        /// <summary>
         /// The ItemDiscount_CanBeApplied_DuringScanning.
         /// </summary>
         [Fact]
@@ -171,22 +152,6 @@ namespace CheckoutSimulator.Domain.Tests
                     .WhenAsync("a second item is scanned that triggers discount", async (sut) => await Task.Run(() => sut.ScanItemAsync(Barcode)))
                     .ThenAsync("the price should include the discount", async (sut, because) => (await sut.RequestTotalPriceAsync()).Should().Be(ExpectedPrice, because))
                     .Go();
-            }
-        }
-
-        /// <summary>
-        /// Methods Guards Against Null Args.
-        /// </summary>
-        [Fact]
-        public void Methods_GuardAgainstNullArgs()
-        {
-            using (var scope = new AssertionScope())
-            using (var scenario = Scenario<GuardClauseAssertion>("Methods Guard Against Null Args"))
-            {
-                scenario.Ctor(() => CreateGuardClauseAssertion())
-                .Given()
-                .When((sut) => { })
-                .Then("methods check for null arguments", (sut, because) => ApplyGuardClauseAssertionToMethods<Till>(sut));
             }
         }
 
@@ -251,19 +216,21 @@ namespace CheckoutSimulator.Domain.Tests
             {
                 string unexpectedBarcode = "A12";
 
-                scenario.Ctor(() => {
+                await scenario.Ctor(() => {
                     var till = new TestFixtureBuilder()
                         .WithStockKeepingUnit("B15", 0.45, "Biscuits")
                         .BuildSut();
                     return new Action(() => till.ScanItem(unexpectedBarcode));
                 })
-                .Given()
-                .When("when the scan item method is invoked", sut => { })
-                .Then("an exception should be thrown", (sutAction, because) =>
+                .GivenAsync()
+                .WhenAsync("scanning an item")
+                .AndAsync("and the item has an unrecognised barcode")
+                .ThenAsync("an exception should be thrown", (sutAction) =>
                     sutAction
                         .Should()
                         .Throw<UnknownItemException>()
-                        .WithMessage("Unrecognised barcode: A12"));
+                        .WithMessage("Unrecognised barcode: A12"))
+                .Go();
             }
         }
 
