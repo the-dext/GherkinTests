@@ -2,10 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Gherkin tests allows you to add structure to your tests in either Gherkin (Given-When-Then style) or TripleA (Arrange-Act-Assert style), using the test and assertion framework you already have.
+----
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></Description>
+    <PackageReleaseNotes>Version one, Gherkin and AAA test support.</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/the-dext/GherkinTests</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/the-dext/GherkinTests</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>gherkin unit-tests testing arrange-act-assert aaa bdd cucumber spec</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="AAA\Factories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

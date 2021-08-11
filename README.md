@@ -7,3 +7,8 @@ For full documentation for the style of test you're using, see one of the follow
 See __ReadMe-Gherking.md__ for instructions on using Gherkin style tests.
 
 See __ReadMe-AAA.md__ for instructions on using Arrange-Act-Assert style tests.
+
+
+---
+
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
